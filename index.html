@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brisa Air | Purificador inteligente com dados em tempo real</title>
+  <meta name="description" content="Purificador de ar com sensores conectados e painel de dados em tempo real.">
+
+  <!-- ==========================================================
+       [GTM - HEAD] INICIO
+       Cole aqui o snippet do Google Tag Manager (parte <script>).
+       Ele deve ficar o mais alto possivel dentro do <head>.
+       [GTM - HEAD] FIM
+       ========================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Design tokens (inspiracao: identidade azul da DP6) ---------- */
+    :root {
+      --navy: #07163a;
+      --blue: #1b4dff;
+      --sky: #e8efff;
+      --ink: #0f1c3d;
+      --muted: #55638a;
+      --line: #d5def5;
+      --white: #ffffff;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Arial, sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .wrap { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* ---------- Botoes ---------- */
+    .btn { display: inline-block; padding: 12px 26px; border-radius: 999px; border: 2px solid var(--blue); background: var(--blue); color: var(--white); font: 700 1rem inherit; font-family: inherit; cursor: pointer; transition: background .2s, color .2s; }
+    .btn:hover { background: var(--navy); border-color: var(--navy); }
+    .btn.ghost { background: transparent; color: var(--blue); }
+    .btn.ghost:hover { background: var(--blue); color: var(--white); }
+
+    /* ---------- Header ---------- */
+    header.site { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--navy); }
+    .logo span { color: var(--blue); }
+    nav { display: flex; gap: 22px; align-items: center; font-weight: 500; }
+    nav a:not(.btn):hover { color: var(--blue); }
+    @media (max-width: 680px) { nav a:not(.btn) { display: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { background: var(--navy); color: var(--white); padding: 88px 0 96px; }
+    .hero .wrap { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; }
+    .hero p { margin: 20px 0 32px; color: #b9c6ec; max-width: 52ch; font-size: 1.1rem; }
+    .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero .btn.ghost { color: var(--white); border-color: #5d78c9; }
+    .hero .btn.ghost:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
+    /* "Painel" decorativo: mostra um dado ao vivo do produto */
+    .meter { background: #0d2250; border: 1px solid #243c7c; border-radius: var(--radius); padding: 28px; }
+    .meter small { color: #8ea3de; }
+    .meter strong { display: block; font-size: 4rem; line-height: 1; margin: 8px 0; }
+    .bar { height: 10px; border-radius: 99px; background: #1b2f66; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: 82%; background: var(--blue); }
+    @media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+    /* ---------- Diferenciais ---------- */
+    section.block { padding: 80px 0; }
+    section.block h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: var(--navy); letter-spacing: -.01em; margin-bottom: 36px; max-width: 24ch; line-height: 1.2; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .item { background: var(--sky); border-radius: var(--radius); padding: 28px; }
+    .item h3 { color: var(--navy); margin-bottom: 8px; }
+    .item p { color: var(--muted); margin-bottom: 14px; }
+    .item a { color: var(--blue); font-weight: 700; border-bottom: 2px solid transparent; }
+    .item a:hover { border-color: var(--blue); }
+    @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Formulario ---------- */
+    #contato { background: var(--sky); }
+    .form-box { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .form-box h2 { margin-bottom: 14px; }
+    .form-box > div > p { color: var(--muted); }
+    form { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 16px; }
+    label { font-weight: 700; font-size: .95rem; display: grid; gap: 6px; }
+    input { padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 8px; font: inherit; }
+    input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(27,77,255,.2); }
+    .msg { min-height: 1.4em; font-weight: 700; font-size: .95rem; }
+    .msg.err { color: #c02626; }
+    .msg.ok { color: #0a7a3f; }
+    @media (max-width: 820px) { .form-box { grid-template-columns: 1fr; } }
+
+    /* ---------- Footer ---------- */
+    footer.site { background: var(--navy); color: #b9c6ec; padding: 40px 0; }
+    footer.site .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    footer.site nav a:hover { color: var(--white); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+
+<!-- ==================================================================
+     FIM DO </head> / INICIO DO <body>
+     ================================================================== -->
+<body>
+
+  <!-- ==========================================================
+       [GTM - BODY] INICIO
+       Cole aqui o snippet <noscript> do Google Tag Manager,
+       imediatamente apos a abertura da tag <body>.
+       [GTM - BODY] FIM
+       ========================================================== -->
+
+  <!--
+    ATRIBUTOS DE RASTREAMENTO (usados pelo script no final da pagina):
+      data-dl-type  -> vira custom_type  (ex.: botao-header, link, submit)
+      data-dl-title -> vira custom_title (opcional; se nao existir, usa o texto do elemento)
+    Todo <a> e <button> da pagina e capturado automaticamente.
+  -->
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site">
+    <div class="wrap">
+      <a href="#topo" class="logo" data-dl-type="link-logo" data-dl-title="Logo Brisa Air">Brisa<span>Air</span></a>
+      <nav aria-label="Principal">
+        <a href="#diferenciais" data-dl-type="link-header">Diferenciais</a>
+        <a href="#contato" data-dl-type="link-header">Contato</a>
+        <a href="#contato" class="btn" data-dl-type="botao-header">Quero testar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Ar limpo em casa, com o dado na sua mão.</h1>
+          <p>O Brisa Air purifica o ambiente e mostra em tempo real a qualidade do ar, o consumo do filtro e o histórico da semana.</p>
+          <div class="actions">
+            <a href="#contato" class="btn" data-dl-type="botao-hero">Receber uma demonstração</a>
+            <a href="#diferenciais" class="btn ghost" data-dl-type="botao-hero">Ver diferenciais</a>
+          </div>
+        </div>
+        <div class="meter" aria-label="Exemplo de painel">
+          <small>Qualidade do ar agora</small>
+          <strong>82</strong>
+          <div class="bar"><i></i></div>
+          <small>Boa. Filtro com 64% de vida útil.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DIFERENCIAIS ===================== -->
+    <section class="block" id="diferenciais">
+      <div class="wrap">
+        <h2>Três motivos para respirar com mais confiança</h2>
+        <div class="grid">
+          <article class="item">
+            <h3>Sensores precisos</h3>
+            <p>Mede partículas finas, umidade e compostos orgânicos a cada 10 segundos.</p>
+            <a href="#contato" data-dl-type="link" data-dl-title="Saiba mais sensores">Saiba mais sobre os sensores</a>
+          </article>
+          <article class="item">
+            <h3>App com histórico</h3>
+            <p>Veja a evolução do ar por hora, dia e semana e receba alertas no celular.</p>
+            <a href="#contato" data-dl-type="link" data-dl-title="Saiba mais aplicativo">Conhecer o aplicativo</a>
+          </article>
+          <article class="item">
+            <h3>Filtro inteligente</h3>
+            <p>O aparelho avisa quando é hora de trocar e calcula o custo mensal de uso.</p>
+            <a href="#contato" data-dl-type="link" data-dl-title="Saiba mais filtro">Ver o filtro</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FORMULARIO ===================== -->
+    <section class="block" id="contato">
+      <div class="wrap form-box">
+        <div>
+          <h2>Peça sua demonstração gratuita</h2>
+          <p>Preencha os dados e nossa equipe entra em contato em até 1 dia útil.</p>
+        </div>
+
+        <!-- novalidate: a validacao e feita no JS (para podermos checar espacos em branco) -->
+        <form id="form-lead" novalidate>
+          <label>Nome
+            <input type="text" name="nome" autocomplete="name" required>
+          </label>
+          <label>E-mail
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>Cargo / Empresa
+            <input type="text" name="cargo_empresa" autocomplete="organization-title" required>
+          </label>
+          <!-- data-dl-submit: este botao e tratado no evento "submit", nao no clique -->
+          <button type="submit" class="btn" data-dl-type="submit" data-dl-title="Enviar formulario de demonstracao" data-dl-submit>Enviar</button>
+          <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 Brisa Air. Projeto pedagógico.</span>
+      <nav aria-label="Rodapé">
+        <a href="#topo" data-dl-type="link-footer">Voltar ao topo</a>
+        <a href="#contato" data-dl-type="botao-footer" class="btn ghost" style="padding:8px 18px">Fale conosco</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* =================================================================
+       DATALAYER - LOGICA
+       1) Garante que window.dataLayer existe (o GTM tambem a utiliza).
+       2) sanitize(): padroniza qualquer valor -> minusculo, sem acento,
+          sem caracteres especiais, hifen no lugar de espaco.
+       3) trackClick(): monta e envia o evento no padrao exigido.
+       4) Um unico "ouvinte" de clique no document captura TODOS os
+          <a> e <button> (event delegation).
+       5) O botao de envio do formulario NAO dispara no clique: so dispara
+          no evento "submit", e apenas se todos os campos estiverem validos.
+       ================================================================= */
+    window.dataLayer = window.dataLayer || [];
+
+    // Nome da pagina atual (vira custom_section)
+    var PAGE_NAME = 'lp-brisa-air';
+
+    // Exemplo: "Receber uma demonstração!" -> "receber-uma-demonstracao"
+    function sanitize(value) {
+      return String(value || '')
+        .normalize('NFD')                 // separa letra + acento
+        .replace(/[\u0300-\u036f]/g, '')  // remove os acentos
+        .toLowerCase()                    // caixa baixa
+        .replace(/[^a-z0-9\s-]/g, '')     // remove caracteres especiais
+        .trim()
+        .replace(/[\s-]+/g, '-')          // espacos (e hifens repetidos) -> um hifen
+        .replace(/^-+|-+$/g, '');         // sem hifen nas pontas
+    }
+
+    // Envia o evento "clique" ao dataLayer no formato padrao
+    function trackClick(type, title) {
+      window.dataLayer.push({
+        'event': 'clique',
+        'custom_section': sanitize(PAGE_NAME),
+        'custom_type': sanitize(type),
+        'custom_title': sanitize(title)
+      });
+    }
+
+    // Captura cliques em qualquer link ou botao
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('a, button');
+      if (!el) return;
+
+      // Botao de envio do formulario: tratado no evento submit (ver abaixo)
+      if (el.hasAttribute('data-dl-submit')) return;
+
+      var type = el.getAttribute('data-dl-type') || (el.tagName === 'A' ? 'link' : 'botao');
+      var title = el.getAttribute('data-dl-title') || el.textContent;
+      trackClick(type, title);
+    });
+
+    // Formulario: valida e so entao dispara o dataLayer de submit
+    var form = document.getElementById('form-lead');
+    var msg = document.getElementById('msg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // pagina estatica: nao ha backend para receber os dados
+
+      var fields = form.querySelectorAll('input[required]');
+      var allFilled = true;
+      fields.forEach(function (f) { if (!f.value.trim()) allFilled = false; });
+      var emailOk = form.elements['email'].checkValidity(); // formato de e-mail valido
+
+      // Se algum campo estiver vazio/invalido: mostra erro e NAO envia o dataLayer
+      if (!allFilled || !emailOk) {
+        msg.className = 'msg err';
+        msg.textContent = allFilled
+          ? 'Digite um e-mail válido, como nome@empresa.com.'
+          : 'Preencha todos os campos para enviar.';
+        return;
+      }
+
+      // Tudo certo: dispara o evento de submit com o mesmo padrao
+      var btn = form.querySelector('[data-dl-submit]');
+      trackClick(btn.getAttribute('data-dl-type'), btn.getAttribute('data-dl-title'));
+
+      msg.className = 'msg ok';
+      msg.textContent = 'Enviado! Entraremos em contato em breve.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
